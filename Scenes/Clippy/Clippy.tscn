@@ -1,0 +1,86 @@
+[gd_scene load_steps=9 format=3 uid="uid://gtmxf5okgg64"]
+
+[ext_resource type="Script" uid="uid://d07qvauqq8ilp" path="res://Scenes/Clippy/Clippy.gd" id="1_3wiu1"]
+[ext_resource type="Texture2D" uid="uid://gssv5lg13vd7" path="res://assets/clippy/clippy.png" id="1_trvrx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wiu1"]
+atlas = ExtResource("1_trvrx")
+region = Rect2(226, 5, 625, 1196)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kwguc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3wiu1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3wiu1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3wiu1")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_trvrx"]
+radius = 64.8649
+height = 409.756
+
+[sub_resource type="Animation" id="Animation_kwguc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_3wiu1"]
+resource_name = "jump"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.436332, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hka1d"]
+_data = {
+&"RESET": SubResource("Animation_kwguc"),
+&"jump": SubResource("Animation_3wiu1")
+}
+
+[node name="Clippy" type="CharacterBody2D"]
+script = ExtResource("1_3wiu1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.073, 0.073)
+sprite_frames = SubResource("SpriteFrames_kwguc")
+animation = &"fly"
+autoplay = "fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+scale = Vector2(0.205, 0.205)
+shape = SubResource("CapsuleShape2D_trvrx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hka1d")
+}

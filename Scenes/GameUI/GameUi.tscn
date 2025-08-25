@@ -1,0 +1,123 @@
+[gd_scene load_steps=9 format=3 uid="uid://c5yy8r5okk7dg"]
+
+[ext_resource type="Script" uid="uid://bfalfybys68p2" path="res://Scenes/GameUI/GameUi.gd" id="1_556m7"]
+[ext_resource type="FontFile" uid="uid://qt581pcarqp8" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="2_81r78"]
+[ext_resource type="AudioStream" uid="uid://crsh4wbgajvk5" path="res://assets/audio/score.wav" id="3_556m7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_81r78"]
+font = ExtResource("2_81r78")
+font_size = 32
+font_color = Color(0.111197, 0.111197, 0.111197, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_556m7"]
+font = ExtResource("2_81r78")
+font_size = 44
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_iq8cv"]
+font = ExtResource("2_81r78")
+font_size = 44
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_81r78"]
+resource_name = "flash"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PressSpaceLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_556m7"]
+_data = {
+&"flash": SubResource("Animation_81r78")
+}
+
+[node name="GameUI" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_556m7")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 13
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+text = "0000"
+label_settings = SubResource("LabelSettings_81r78")
+
+[node name="PressSpaceLabel" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.5
+offset_top = -46.5
+offset_right = 123.5
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "PRESS SPACE
+   "
+label_settings = SubResource("LabelSettings_556m7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameOverLabel" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.5
+offset_top = -11.5
+offset_right = 123.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over
+  "
+label_settings = SubResource("LabelSettings_iq8cv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.3
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_556m7")
+}
+autoplay = "flash"
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_556m7")
+volume_db = -15.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
