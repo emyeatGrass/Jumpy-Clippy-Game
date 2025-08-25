@@ -2,7 +2,10 @@
 
 A Flappy Bird-inspired game built with Godot 4.4.1, featuring original artwork and game mechanics.
 
-![Main Menu](doc/images/menu.png) ![Gameplay](doc/images/gameplay.png)
+<p align="center">
+  <img src="https://github.com/emyeatGrass/Jumpy-Clippy-Game/blob/main/docs/images/menu.png?raw=true" width="300" />
+  <img src="https://github.com/emyeatGrass/Jumpy-Clippy-Game/blob/main/docs/images/gameplay.png?raw=true" width="300" />
+</p>
 
 ## Overview
 This project demonstrates full-game development capabilities using Godot Engine, including game state management, persistent data storage, and responsive UI implementation. **Note: This project uses a character inspired by Microsoft's Clippy for educational and portfolio purposes only.**
