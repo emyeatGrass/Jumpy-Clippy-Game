@@ -2,6 +2,8 @@
 
 A Flappy Bird-inspired game built with Godot 4.4.1, featuring original artwork and game mechanics.
 
+![Main Menu](doc/images/menu.png) ![Gameplay](doc/images/gameplay.png)
+
 ## Overview
 This project demonstrates full-game development capabilities using Godot Engine, including game state management, persistent data storage, and responsive UI implementation. **Note: This project uses a character inspired by Microsoft's Clippy for educational and portfolio purposes only.**
 
